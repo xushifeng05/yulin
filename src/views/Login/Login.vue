@@ -67,7 +67,6 @@
       [Field.name]: Field,
       [Form.name]: Form,
       [Icon.name]: Icon,
-
     },
     data() {
       return {
@@ -107,8 +106,8 @@
               this.$store.commit('setUser',{
                 name:res.data.data.name,
                 id:res.data.data.id,
-                img:res.data.data.img,
                 sex:res.data.data.sex,
+                img:res.data.data.imgurl,
               });
             }else{
               this.$notify({type: 'danger',message:res.data.message});

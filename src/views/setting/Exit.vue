@@ -15,6 +15,7 @@
       exit(){
         axios.get("http://localhost:8081/exit").then((response) =>{
           console.log(response.data);
+          this.$store.commit('initializationUser');
         })
       //   axios.post("http://localhost:8081/test",this.$qs.stringify({
       //     id:231119009,
