@@ -13,7 +13,11 @@
     },
     methods:{
       exit(){
-        axios.get("http://localhost:8081/exit").then((response) =>{
+        axios.post("http://localhost:8081/exit",this.$qs.stringify(
+            {
+              id:this.$store.state.user.userNumber
+            }
+        )).then((response) =>{
           console.log(response.data);
           this.$store.commit('initializationUser');
         })

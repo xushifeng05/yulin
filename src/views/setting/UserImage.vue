@@ -3,10 +3,10 @@
     <el-upload
             class="avatar-uploader el-upload"
             action="#"
-
             :show-file-list="false"
             :on-success="handleAvatarSuccess"
             :before-upload="beforeAvatarUpload"
+            :http-request="upload"
     >
       <img v-if="imageUrl" :src="imageUrl" class="avatar">
       <i v-else class="el-icon-plus avatar-uploader-icon"></i>
@@ -21,14 +21,29 @@
     data() {
       return {
         imageUrl:"",
+        userId:"",
       };
     },
     mounted() {
       this.imageUrl = this.$store.state.user.userImg;
+      this.userID = this.$store.state.user.userNumber;
+      console.log(this.userId)
     },
     methods: {
+      //传送文件用qs后端接收不到，无奈用formData
+      upload(param){
+        const file = param.file;
+        const formData = new FormData();
+        formData.append('id',this.userID);
+        formData.append('img',file);
+        this.$axios.post('http://localhost:8081/updateImg',formData).then(res=>{
+          this.$store.commit('setImg',res.data.data);
+          this.imageUrl = this.$store.state.user.userImg;
+        })
+      },
       handleAvatarSuccess(res, file) {
         this.imageUrl = URL.createObjectURL(file.raw);
+        console.log(file.raw);
       },
       beforeAvatarUpload(file) {
         const isJPG = file.type === 'image/jpeg';
@@ -42,9 +57,6 @@
         }
         return isJPG && isLt2M;
       },
-      uploadImg(){
-        this.$store.commit('setImg',this.imageUrl)
-      }
     }
   }
 </script>

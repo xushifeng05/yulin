@@ -100,7 +100,6 @@
                 password: this.password
               })
           ).then((res) => {
-            console.log(res.data.data);
             if (res.data.code == 200){
               this.$router.push('/TeacherOrStudent');
               this.$store.commit('setUser',{

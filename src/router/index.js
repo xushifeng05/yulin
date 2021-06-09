@@ -19,6 +19,10 @@ import Certificate from "../components/setting/Certificate";
 
 const routes = [
   {
+    path: '/',
+    redirect: '/Login'
+  },
+  {
     path: '/findStudent',
     name: findStudent,
     component: findStudent

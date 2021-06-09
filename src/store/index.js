@@ -18,7 +18,7 @@ const store = createStore({
     user:{
       username:"",
       userNumber:"",
-      userImg: null,
+      userImg: "",
       userSex: "",
     },
   },
@@ -31,7 +31,7 @@ const store = createStore({
       state.user.username = "";
       state.user.userNumber = "";
       state.user.userSex = "";
-      state.user.userImg = null;
+      state.user.userImg = "";
     },
     //set模块
     setUser(state,user){
